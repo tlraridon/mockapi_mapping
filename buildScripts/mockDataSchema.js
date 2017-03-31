@@ -53,7 +53,7 @@ var schema = {
             "pattern": "100|100|0"
           }
         },
-        required: ['childID', 'custNum', 'typeID', 'parentID', 'originalValue', 'mappedStatus']
+        required: ['childID', 'custNum', 'typeID', 'parentID', 'originalValue',"mappedValue", 'mappedStatus']
       }
     }
   },
