@@ -3,8 +3,16 @@ var schema = {
   "properties": {
     "mappings": {
       "type": "array",
-      "minItems": 30,
-      "maxItems": 50,
+      "minItems": 10,
+      "maxItems": 15,
+      "statusCode": {
+        "type": "string",
+        "pattern": "200"
+      },
+      "messageText": {
+        "type": "string",
+        "pattern": "OK"
+      },
       "items": {
         "type": "object",
         "properties": {
@@ -26,26 +34,30 @@ var schema = {
           "parentID": {
             "type": "number",
             "minimum": 1,
-            "maximum": 100
+            "maximum": 10
           },
           "originalValue": {
-            "type": "string",
-            "pattern": "Bad 1|Bad 2|Bad 3|Bad 4|Bad 5"
+              "type": "string",
+              "faker": {
+                "fake": "{{name.firstName}} {{name.lastName}}"
+              }
           },
           "mappedValue": {
-            "type": "string",
-            "pattern": "Good 1|Good 2|Good 3|Good 4|Good 5"
+              "type": "string",
+              "faker": {
+                "fake": "{{name.prefix}} {{name.firstName}} {{name.lastName}}"
+              }
           },
           "mappedStatus": {
             "type": "string",
             "pattern": "100|100|0"
           }
         },
-        required: ['childID', 'custNum', 'typeID', 'parentID', 'originalValue', 'mappedValue', 'mappedStatus']
+        required: ['childID', 'custNum', 'typeID', 'parentID', 'originalValue', 'mappedStatus']
       }
     }
   },
-  required: ['mappings']
+  required: ['mappings', 'statusCode', 'messageText']
 };
 
 module.exports = schema;

@@ -3,15 +3,24 @@ var schema = {
   "properties": {
     "mappings": {
       "type": "array",
-      "minItems": 30,
-      "maxItems": 50,
+      "minItems": 10,
+      "maxItems": 15,
+      "statusCode": {
+        "type": "string",
+        "pattern": "200"
+      },
+      "messageText": {
+        "type": "string",
+        "pattern": "OK"
+      },
       "items": {
         "type": "object",
         "properties": {
-          "id": {
+          "childID": {
             "type": "number",
             "unique": true,
-            "minimum": 1
+            "minimum": 1,
+            "maximum": 100
           },
           "custNum": {
             "type": "string",
@@ -22,20 +31,33 @@ var schema = {
             "minimum": 1,
             "maximum": 1
           },
+          "parentID": {
+            "type": "number",
+            "minimum": 1,
+            "maximum": 10
+          },
+          "originalValue": {
+              "type": "string",
+              "faker": {
+                "fake": "{{name.firstName}} {{name.lastName}}"
+              }
+          },
           "mappedValue": {
-            "type": "string",
-            "pattern": "Dr Jones|Dr Smith|Dr Williams|Dr Roberts|Dr Smith"
+              "type": "string",
+              "faker": {
+                "fake": "{{name.prefix}} {{name.firstName}} {{name.lastName}}"
+              }
           },
           "mappedStatus": {
             "type": "string",
             "pattern": "100|100|0"
           }
         },
-        required: ['id', 'custNum', 'typeID', 'mappedValue', 'mappedStatus']
+        required: ['childID', 'custNum', 'typeID', 'parentID', 'originalValue', 'mappedStatus']
       }
     }
   },
-  required: ['mappings']
+  required: ['mappings', 'statusCode', 'messageText']
 };
 
 module.exports = schema;
