@@ -1,0 +1,35 @@
+{
+  "name": "mockapi_mapping",
+  "version": "1.0.0",
+  "description": "Mock API server",
+  "main": "index.js",
+  "dependencies": {
+    "json-server": "^0.9.6"
+  },
+  "devDependencies": {
+    "chalk": "1.1.3",
+    "json-schema-faker": "0.3.6",
+    "json-server": "0.8.22",
+    "localtunnel": "1.8.1"   
+  },
+  "scripts": {
+    "generate-mock-data": "node buildScripts/generateMockData",
+    "share": "lt --port 1128 --subdomain mockecpdata",
+    "security-check": "nsp check",
+    "prestart-mockapi": "npm run generate-mock-data",
+    "start-mockapi": "json-server --watch src/api/db.json --port 3001",
+    "prestart": "node src/startMessage.js",
+    "start": "npm-run-all --parallel security-check start-mockapi",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/tlraridon/mockapi_mapping.git"
+  },
+  "author": "Tamara Raridon",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/tlraridon/mockapi_mapping/issues"
+  },
+  "homepage": "https://github.com/tlraridon/mockapi_mapping#readme"
+}
